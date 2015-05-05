@@ -5,8 +5,14 @@ from joboard.models import Factory
 from joboard.forms import FactoryForm
 from django.template import RequestContext
 
+from urllib import urlopen, urlencode
+import urllib2
+
 import logging
 logger = logging.getLogger(__name__)
+
+ak = "XOyqpuhcxMxuHjpUr4T2BIOG"
+geo_table = "100729"
 
 def index(request):
     form = None
@@ -22,4 +28,22 @@ def index(request):
     return render_to_response('board/new.html', {'form': form}, context_instance=RequestContext(request))
 
 def detail(request):
+    create_poi()
     return render(request, 'board/detail.html')
+
+def create_poi():
+    lat = 31.208816
+    lng = 121.592523
+    url = "http://api.map.baidu.com/geodata/v2/poi/create"
+    params = urlencode({
+        'title': "lenovo",
+        'latitude': lat,
+        'longitude': lng,
+        'coord_type': 3,
+        'geotable_id': geo_table,
+        'ak': ak
+        })
+    req = urllib2.Request(url, params)
+    print str(req)
+    respone = urllib2.urlopen(req)
+    print respone.read()

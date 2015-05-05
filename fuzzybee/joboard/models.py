@@ -3,6 +3,8 @@ from django.db import models
 class Factory(models.Model):
     fact_name = models.CharField(max_length=200)
     fact_addr = models.CharField(max_length=200)
+    fact_lat = models.FloatField()
+    fact_lng = models.FloatField()
     hire_num = models.IntegerField(default=0)
 
 
