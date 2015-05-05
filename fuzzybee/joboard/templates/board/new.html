@@ -1,0 +1,13 @@
+<h1>Hello, fuzzybee</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'board:detail' %}" method="post">
+  
+  <table>
+    {# 可以使用as_ul, as_p来改变格式 #}
+    {{ form.as_table }}
+  </table>
+
+  <input type="submit" value="Confirm" />
+</form>

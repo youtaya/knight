@@ -6,6 +6,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'fuzzybee.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^$', include('joboard.urls')),
+    url(r'^$', 'joboard.views.index',name='home'),
+    url(r'^board/', include('joboard.urls', namespace="board")),
     url(r'^admin/', include(admin.site.urls)),
 )
