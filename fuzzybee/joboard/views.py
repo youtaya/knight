@@ -20,8 +20,8 @@ def index(request):
         form = FactoryForm(request.POST)
         if form.is_valid():
             factory = form.cleaned_data
-            logger.debug("name: " + factory['fact_name'])
-            logger.debug("address: " + factory['fact_addr'])
+            logger.debug("lat: " + str(factory['fact_lat']))
+            logger.debug("lng: " + str(factory['fact_lng']))
             return HttpResponseRedirect(reverse('board:detail'))
     else:
         form = FactoryForm()

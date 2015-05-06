@@ -12,10 +12,10 @@ function set_alert_wb_comment() {
   // 将地址解析结果显示在地图上,并调整地图视野
   myGeo.getPoint(address, function(point){
     if (point) {
-      alert("got point");
-      alert("lat: "+point.lat + " lng:"+point.lng);
       var name = document.getElementById("id_fact_name").value;
-      document.getElementById("id_fact_name").value = name + "##" +point.lat +"##" +point.lng;
+      document.getElementById("id_fact_lat").value = point.lat;
+      document.getElementById("id_fact_lng").value = point.lng;
+      alert("lat: "+point.lat + " lng:"+point.lng);
     }else{
       alert("您选择地址没有解析到结果!");
     }
