@@ -11,6 +11,7 @@ import urllib2
 import logging
 logger = logging.getLogger(__name__)
 
+url = "http://api.map.baidu.com/geodata/v2/poi/create"
 ak = "XOyqpuhcxMxuHjpUr4T2BIOG"
 geo_table = "100729"
 
@@ -22,21 +23,26 @@ def index(request):
             factory = form.cleaned_data
             logger.debug("lat: " + str(factory['fact_lat']))
             logger.debug("lng: " + str(factory['fact_lng']))
+            # TODO: save factory in model
+            create_poi(factory)
             return HttpResponseRedirect(reverse('board:detail'))
     else:
         form = FactoryForm()
     return render_to_response('board/new.html', {'form': form}, context_instance=RequestContext(request))
 
 def detail(request):
-    create_poi()
+    #create_poi()
     return render(request, 'board/detail.html')
 
-def create_poi():
-    lat = 31.208816
-    lng = 121.592523
-    url = "http://api.map.baidu.com/geodata/v2/poi/create"
+def create_poi(fact_info):
+    title = "test factory"
+    address = fact_info['fact_addr']
+    lat = fact_info['fact_lat']
+    lng = fact_info['fact_lng']
+    
     params = urlencode({
-        'title': "lenovo",
+        'title': title,
+        'address': address
         'latitude': lat,
         'longitude': lng,
         'coord_type': 3,
