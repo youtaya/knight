@@ -1,1 +1,16 @@
 html,body{text-align:center;margin:0px auto;}
+
+#Content-Main{
+  height:400px;
+  width:600px;
+  margin:20px;/*设置元素跟其他元素的距离为20像素*/
+  float:left;/*设置浮动，实现多列效果，div+Css布局中很重要的*/
+  background:#C0C0C0;
+}
+
+.left
+{
+  float:left;
+  width:300px;
+  /*background-color:#b0e0e6;*/
+}

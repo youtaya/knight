@@ -19,12 +19,13 @@ def index(request):
     form = None
     if request.method == 'POST':
         form = FactoryForm(request.POST)
+        print form
         if form.is_valid():
             factory = form.cleaned_data
             logger.debug("lat: " + str(factory['fact_lat']))
-            logger.debug("lng: " + str(factory['fact_lng']))
+            logger.debug("addr: " + factory['fact_addr'])
             # TODO: save factory in model
-            create_poi(factory)
+            #create_poi(factory)
             return HttpResponseRedirect(reverse('board:detail'))
     else:
         form = FactoryForm()
@@ -39,10 +40,10 @@ def create_poi(fact_info):
     address = fact_info['fact_addr']
     lat = fact_info['fact_lat']
     lng = fact_info['fact_lng']
-    
+
     params = urlencode({
         'title': title,
-        'address': address
+        'address': address,
         'latitude': lat,
         'longitude': lng,
         'coord_type': 3,

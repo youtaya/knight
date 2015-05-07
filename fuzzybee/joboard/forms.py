@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-
-from django.forms import ModelForm, Textarea, HiddenInput
+from django import forms
+from django.forms import ModelForm, Textarea, TextInput, HiddenInput
 from joboard.models import Factory
 from django.utils.translation import ugettext_lazy as _
+from widgets import PlaceMultiWidget
 
 class FactoryForm(ModelForm):
     class Meta:
@@ -15,8 +16,8 @@ class FactoryForm(ModelForm):
         }
         widgets = {
             'fact_name': Textarea(attrs={'cols': 20, 'rows': 2}),
-            'fact_addr': Textarea(attrs={'cols': 20, 'rows': 2}),
+            'fact_addr': PlaceMultiWidget,
             'hire_num': Textarea(attrs={'cols': 20, 'rows': 1}),
-            'fact_lat': HiddenInput,
-            'fact_lng': HiddenInput,
+            'fact_lat': HiddenInput(attrs={'required': 'False'}),
+            'fact_lng': HiddenInput(attrs={'required': 'False'}),
         }

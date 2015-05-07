@@ -1,24 +1,26 @@
 {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XOyqpuhcxMxuHjpUr4T2BIOG"></script>
 <h1>Hello, fuzzybee</h1>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url 'home' %}" method="post">
-  {% csrf_token %}
-  {# Include the hidden fields #}
-  {% for hidden in form.hidden_fields %}
-  {{ hidden }}
-  {% endfor %}
-  {# Include the visible fields #}
-  {% for field in form.visible_fields %}
-  <div class="fieldWrapper">
-    {{ field.errors }}
-    {{ field.label_tag }} {{ field }}
-  </div>
-  {% endfor %}
+<div id="Content-Main">
+  <form class="left" action="{% url 'home' %}" method="post">
+    {% csrf_token %}
+    {# Include the hidden fields #}
+    {% for hidden in form.hidden_fields %}
+    {{ hidden }}
+    {% endfor %}
+    {# Include the visible fields #}
+    {% for field in form.visible_fields %}
+    <div class="fieldWrapper">
+      {{ field.errors }}
+      {{ field.label_tag }} {{ field }}
+    </div>
+    {% endfor %}
 
-  <input type="submit" onclick="formSubmit()" value="Confirm" />
-</form>
-<script language="JavaScript" type="text/javascript" src="{% static 'js/geopoint.js' %}"></script>
+    <input type="submit" value="Confirm" />
+  </form>
+</div>
+<script language="JavaScript" async type="text/javascript" src="{% static 'js/geopoint.js' %}"></script>
