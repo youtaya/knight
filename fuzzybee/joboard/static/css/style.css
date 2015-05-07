@@ -1,15 +1,27 @@
 html,body{text-align:center;margin:0px auto;}
 
+#red {
+  color:white;
+  background-color:red;
+  min-width: 200px;
+  min-height: 30px;
+}
+
 #Content-Main{
   height:400px;
   width:600px;
   margin:20px;/*设置元素跟其他元素的距离为20像素*/
-  float:left;/*设置浮动，实现多列效果，div+Css布局中很重要的*/
   background:#C0C0C0;
 }
 
-.left
-{
+.left{
+  width:300px;
+  margin:20px
+  /*background-color:#b0e0e6;*/
+}
+
+.fieldWrapper{
+  text-align: left;
   float:left;
   width:300px;
   /*background-color:#b0e0e6;*/

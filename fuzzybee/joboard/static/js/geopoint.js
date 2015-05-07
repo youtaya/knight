@@ -7,11 +7,12 @@ if(window.attachEvent) {
 function set_alert_wb_comment() {
   var city = document.getElementById("id_fact_addr_0").value;
   var distrct = document.getElementById("id_fact_addr_1").value;
-  var road = document.getElementById("id_fact_addr_3").value;
+  var road = document.getElementById("id_fact_addr_2").value;
   var address = city+distrct+road;
-  // 创建地址解析器实例
+  alert("address: "+address)
+  // create instance of address pareser
   var myGeo = new BMap.Geocoder();
-  // 将地址解析结果显示在地图上,并调整地图视野
+  // parse address and show the result
   myGeo.getPoint(address, function(point){
     if (point) {
       var name = document.getElementById("id_fact_name").value;

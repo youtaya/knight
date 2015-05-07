@@ -15,7 +15,7 @@ class FactoryForm(ModelForm):
             'hire_num': _(u'招聘人数'),
         }
         widgets = {
-            'fact_name': Textarea(attrs={'cols': 20, 'rows': 2}),
+            'fact_name': Textarea(attrs={'cols': 40, 'rows': 1}),
             'fact_addr': PlaceMultiWidget,
             'hire_num': Textarea(attrs={'cols': 20, 'rows': 1}),
             'fact_lat': HiddenInput(attrs={'required': 'False'}),

@@ -1,12 +1,13 @@
 {% load staticfiles %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XOyqpuhcxMxuHjpUr4T2BIOG"></script>
 <h1>Hello, fuzzybee</h1>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <div id="Content-Main">
-  <form class="left" action="{% url 'home' %}" method="post">
+  <form action="{% url 'home' %}" method="post">
+
     {% csrf_token %}
     {# Include the hidden fields #}
     {% for hidden in form.hidden_fields %}
@@ -16,11 +17,15 @@
     {% for field in form.visible_fields %}
     <div class="fieldWrapper">
       {{ field.errors }}
-      {{ field.label_tag }} {{ field }}
+      <div class="left">
+        {{ field.label_tag }} {{ field }}
+      </div>
     </div>
     {% endfor %}
 
-    <input type="submit" value="Confirm" />
+    <div class="left">
+      <input id="red" type="submit" value="确认提交" />
+    </div>
   </form>
 </div>
 <script language="JavaScript" async type="text/javascript" src="{% static 'js/geopoint.js' %}"></script>

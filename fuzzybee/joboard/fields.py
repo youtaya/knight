@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django import forms
 from joboard.widgets import PlaceMultiWidget
 
@@ -6,8 +7,8 @@ class PlaceMultiField(forms.MultiValueField):
 
     def __init__(self, *args, **kwargs):
         fields = (
-            forms.CharField(),
-            forms.CharField(),
+            forms.ChoiceField(),
+            forms.ChoiceField(),
             forms.CharField(),
         )
         super(PlaceMultiField, self).__init__(fields, *args, **kwargs)
