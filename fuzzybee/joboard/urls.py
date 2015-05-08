@@ -2,5 +2,5 @@ from django.conf.urls import patterns, url
 from joboard import views
 
 urlpatterns = patterns('',
-    url(r'^$', views.detail, name='detail'),
+    url(r'^(?P<fact_id>[0-9]+)$', views.detail, name='detail'),
 )

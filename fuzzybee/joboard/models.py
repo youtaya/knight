@@ -1,5 +1,6 @@
 from django.db import models
 from joboard.fields import PlaceMultiField
+from django.utils.encoding import smart_unicode
 
 class PlaceMultiModelField(models.Field):
 
@@ -19,8 +20,8 @@ class Factory(models.Model):
     hire_num = models.IntegerField(default=0)
 
 
-    def __str__(self):
-        return self.fact_name
+    def __unicode__(self):
+        return smart_unicode(self.fact_name)
 
     class Meta:
         ordering = ['fact_name','hire_num']

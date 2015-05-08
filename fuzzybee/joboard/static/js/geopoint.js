@@ -9,7 +9,7 @@ function set_alert_wb_comment() {
   var distrct = document.getElementById("id_fact_addr_1").value;
   var road = document.getElementById("id_fact_addr_2").value;
   var address = city+distrct+road;
-  alert("address: "+address)
+  //alert("address: "+address)
   // create instance of address pareser
   var myGeo = new BMap.Geocoder();
   // parse address and show the result
@@ -18,7 +18,7 @@ function set_alert_wb_comment() {
       var name = document.getElementById("id_fact_name").value;
       document.getElementById("id_fact_lat").value = point.lat;
       document.getElementById("id_fact_lng").value = point.lng;
-      alert("lat: "+point.lat + " lng:"+point.lng);
+      //alert("lat: "+point.lat + " lng:"+point.lng);
     }else{
       alert("您选择地址没有解析到结果!");
     }

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import get_object_or_404, render_to_response, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
@@ -24,15 +25,18 @@ def index(request):
             factory = form.cleaned_data
             logger.debug("lat: " + str(factory['fact_lat']))
             logger.debug("addr: " + factory['fact_addr'])
-            # TODO: save factory in model
+            '''TODO: save factory in model, address is empty!'''
+            factmodel = form.save()
+            factid = factmodel.id
+
             create_poi(factory)
-            return HttpResponseRedirect(reverse('board:detail'))
+            return HttpResponseRedirect(reverse('board:detail', args=(factid,)) )
     else:
         form = FactoryForm()
     return render_to_response('board/new.html', {'form': form}, context_instance=RequestContext(request))
 
-def detail(request):
-    #create_poi()
+def detail(request, fact_id):
+    print fact_id
     return render(request, 'board/detail.html')
 
 def create_poi(fact_info):
@@ -40,17 +44,17 @@ def create_poi(fact_info):
     address = fact_info['fact_addr']
     lat = fact_info['fact_lat']
     lng = fact_info['fact_lng']
-    num = fact_info['fact_num']
+    num = fact_info['hire_num']
 
     params = urlencode({
-        'title': title,
-        'address': address,
+        'title': title.encode("utf-8"),
+        'address': address.encode("utf-8"),
         'latitude': lat,
         'longitude': lng,
         'coord_type': 3,
         'geotable_id': geo_table,
         'ak': ak,
-        'job_num': num
+        'job_num': num,
         })
     req = urllib2.Request(url, params)
     print str(req)
