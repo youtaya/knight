@@ -1,28 +1,8 @@
-html,body{text-align:center;margin:0px auto;}
-
-#red {
-  color:white;
-  background-color:red;
-  min-width: 200px;
-  min-height: 30px;
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
-#Content-Main{
-  height:400px;
-  width:600px;
-  margin:20px;/*设置元素跟其他元素的距离为20像素*/
-  background:#C0C0C0;
-}
-
-.left{
-  width:300px;
-  margin:20px
-  /*background-color:#b0e0e6;*/
-}
-
-.fieldWrapper{
-  text-align: left;
-  float:left;
-  width:300px;
-  /*background-color:#b0e0e6;*/
+.navbar {
+  margin-bottom: 20px;
 }

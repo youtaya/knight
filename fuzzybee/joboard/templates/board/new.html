@@ -1,31 +1,78 @@
 {% load staticfiles %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>Two Little bees</title>
 <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XOyqpuhcxMxuHjpUr4T2BIOG"></script>
-<h1>Hello, fuzzybee</h1>
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<div class="container">
+  <!-- Static navbar -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Project name</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li class="dropdown-header">Nav header</li>
+              <li><a href="#">Separated link</a></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
+          <li><a href="../navbar-static-top/">Static top</a></li>
+          <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+  </nav>
 
-<div id="Content-Main">
-  <form action="{% url 'home' %}" method="post">
 
-    {% csrf_token %}
-    {# Include the hidden fields #}
-    {% for hidden in form.hidden_fields %}
-    {{ hidden }}
-    {% endfor %}
-    {# Include the visible fields #}
-    {% for field in form.visible_fields %}
-    <div class="fieldWrapper">
-      {{ field.errors }}
-      <div class="left">
+  <div class="jumbotron">
+    <h1>Hello, fuzzybee</h1>
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <form action="{% url 'home' %}" method="post">
+      {% csrf_token %}
+      {# Include the hidden fields #}
+      {% for hidden in form.hidden_fields %}
+      {{ hidden }}
+      {% endfor %}
+      {# Include the visible fields #}
+      {% for field in form.visible_fields %}
+      <div class="fieldWrapper">
+        {{ field.errors }}
         {{ field.label_tag }} {{ field }}
       </div>
-    </div>
-    {% endfor %}
+      {% endfor %}
 
-    <div class="left">
-      <input id="red" type="submit" value="确认提交" />
-    </div>
-  </form>
-</div>
+      <div>
+        <input class="btn btn-lg btn-primary" type="submit" value="确认提交" />
+      </div>
+    </form>
+  </div>
+</div><!-- /.container -->
+
 <script language="JavaScript" async type="text/javascript" src="{% static 'js/geopoint.js' %}"></script>
+<script language="JavaScript" async type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
