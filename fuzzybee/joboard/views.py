@@ -25,7 +25,7 @@ def index(request):
             logger.debug("lat: " + str(factory['fact_lat']))
             logger.debug("addr: " + factory['fact_addr'])
             # TODO: save factory in model
-            #create_poi(factory)
+            create_poi(factory)
             return HttpResponseRedirect(reverse('board:detail'))
     else:
         form = FactoryForm()
@@ -36,10 +36,11 @@ def detail(request):
     return render(request, 'board/detail.html')
 
 def create_poi(fact_info):
-    title = "test factory"
+    title = fact_info['fact_name']
     address = fact_info['fact_addr']
     lat = fact_info['fact_lat']
     lng = fact_info['fact_lng']
+    num = fact_info['fact_num']
 
     params = urlencode({
         'title': title,
@@ -48,7 +49,8 @@ def create_poi(fact_info):
         'longitude': lng,
         'coord_type': 3,
         'geotable_id': geo_table,
-        'ak': ak
+        'ak': ak,
+        'job_num': num
         })
     req = urllib2.Request(url, params)
     print str(req)

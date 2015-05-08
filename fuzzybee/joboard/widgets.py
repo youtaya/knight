@@ -5,8 +5,8 @@ from django.forms import widgets
 class PlaceMultiWidget(forms.MultiWidget):
 
     def __init__(self, attrs=None):
-        cities = [(city,city) for city in (u'上海市',u'广州市')]
-        districts = [(distrct,distrct) for distrct in (u'浦东新区',u'闵行区',u'嘉定区',u'宝山区',u'徐汇区')]
+        cities = [(city,city) for city in (u'',u'上海市',u'广州市')]
+        districts = [(distrct,distrct) for distrct in (u'',u'浦东新区',u'闵行区',u'嘉定区',u'宝山区',u'徐汇区')]
         _widgets = (
             widgets.Select(attrs=attrs, choices=cities),
             widgets.Select(attrs=attrs, choices=districts),
