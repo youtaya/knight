@@ -3,7 +3,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>Two Little bees</title>
+<title>两个小蜜蜂</title>
 <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
 <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XOyqpuhcxMxuHjpUr4T2BIOG"></script>
@@ -19,13 +19,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Fuzzy Bee</a>
+        <a class="navbar-brand" href="#">小蜜蜂</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
+          <li class="active"><a href="#">招聘</a></li>
+          <li><a href="#">关于</a></li>
+          <li><a href="#">联系</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div><!--/.container-fluid -->
@@ -33,7 +33,7 @@
 
 
   <div class="jumbotron">
-    <h1>Hello, fuzzybee</h1>
+    <h2>在线发布招聘信息</h2>
 
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     <form action="{% url 'home' %}" method="post">

@@ -37,7 +37,8 @@ def index(request):
 
 def detail(request, fact_id):
     print fact_id
-    return render(request, 'board/detail.html')
+    info = get_object_or_404(Factory, pk=fact_id)
+    return render(request, 'board/detail.html', {'info':info})
 
 def create_poi(fact_info):
     title = fact_info['fact_name']
