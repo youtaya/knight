@@ -8,10 +8,10 @@ class PlaceMultiField(forms.MultiValueField):
     widget = PlaceMultiWidget
 
     def __init__(self, *args, **kwargs):
-        cities = [(city,city) for city in (u'上海市',u'广州市')]
+        cities = [(city,city) for city in (u'上海市',u'北京市')]
 
-        f = open(os.path.join(settings.BASE_DIR, 'region'))
-        districts = [(distrct,distrct) for distrct in f.readlines()]
+        f = open(os.path.join(settings.BASE_DIR, 'region_sh'))
+        districts = [(u'上海市',distrct) for distrct in f.readlines()]
 
         fields = (
             forms.ChoiceField(choices=cities),
