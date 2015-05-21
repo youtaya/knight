@@ -34,11 +34,18 @@
   <div class="jumbotron">
     <h2>招聘信息</h2>
 
-    <ul>
-        <li>企业名称：{{ info.fact_name }}</li>
-        <li>工作地址：{{ info.fact_addr }}</li>
-        <li>招聘人数：{{ info.hire_num }}</li>
-    </ul>
+    <table class="table table-striped">
+      <tr>
+        <th>Item</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>企业名称：{{ info.fact_name }}</td>
+        <td>工作地址：{{ info.fact_addr }}</td>
+        <td>招聘人数：{{ info.hire_num }}</td>
+      </tr>
+
+    </table>
   </div>
   <a href="{% url 'home'  %}">返回</a>
 </div><!-- /.container -->

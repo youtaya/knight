@@ -33,10 +33,12 @@
 
 
   <div class="jumbotron">
-    <h2>在线发布招聘信息</h2>
+    <div class="form-group">
+      <h2>在线发布招聘信息</h2>
+    </div>
 
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <form action="{% url 'home' %}" method="post">
+    <form class="form-horizontal" action="{% url 'home' %}" method="post">
       {% csrf_token %}
       {# Include the hidden fields #}
       {% for hidden in form.hidden_fields %}
@@ -44,15 +46,21 @@
       {% endfor %}
       {# Include the visible fields #}
       {% for field in form.visible_fields %}
-      <div class="fieldWrapper">
+      <div class="form-group">
         {{ field.errors }}
-        {{ field.label_tag }} {{ field }}
+        <div class="col-sm-2 control-label">{{ field.label_tag }}</div>
+        <div <div class="col-sm-10">
+          {{ field }}
+        </div>
       </div>
       {% endfor %}
 
-      <div>
-        <input class="btn btn-lg btn-primary" type="submit" value="确认提交" />
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <input class="btn btn-lg btn-primary" type="submit" value="确认提交" />
+        </div>
       </div>
+
     </form>
   </div>
 </div><!-- /.container -->

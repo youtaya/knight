@@ -18,7 +18,7 @@ class FactoryForm(ModelForm):
             'hire_num': _(u'招聘人数'),
         }
         widgets = {
-            'fact_name': Textarea(attrs={'cols': 30, 'rows': 1}),
+            'fact_name': Textarea(attrs={'cols': 36, 'rows': 1}),
             'job_position': Select,
             'job_salary': Select,
             'job_gender': Select,
