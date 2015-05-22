@@ -17,10 +17,10 @@ class PlaceMultiModelField(models.Field):
 
 
 f = open(os.path.join(settings.BASE_DIR, 'job'))
-JOB_CHOICES = ((job,job) for job in f.readlines())
+JOB_CHOICES = ((job.strip(),job.strip()) for job in f.readlines())
 
 f = open(os.path.join(settings.BASE_DIR, 'salary'))
-JOB_SALARY = ((salary,salary) for salary in f.readlines())
+JOB_SALARY = ((salary.strip(),salary.strip()) for salary in f.readlines())
 
 JOB_GENDER = ((u'男',u'男'),(u'女',u'女'))
 
