@@ -35,15 +35,26 @@
     <h2>招聘信息</h2>
 
     <table class="table table-striped">
-      <tr>
-        <th>Item</th>
-        <th>Value</th>
-      </tr>
-      <tr>
-        <td>企业名称：{{ info.fact_name }}</td>
-        <td>工作地址：{{ info.fact_addr }}</td>
-        <td>招聘人数：{{ info.hire_num }}</td>
-      </tr>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>企业名称</td>
+          <td>{{ info.fact_name }}</td>
+        </tr>
+        <tr>
+          <td>工作地址</td>
+          <td>{{ info.fact_addr }}</td>
+        </tr>
+        <tr>
+          <td>招聘人数</td>
+          <td>{{ info.hire_num }}</td>
+        </tr>
+      </tbody>
 
     </table>
   </div>
