@@ -21,7 +21,7 @@ class PlaceMultiWidget(forms.MultiWidget):
 
     def decompress(self, value):
         if value:
-            return [value.split(':')[0:3]]
+            return [value.split()[0:3]]
         return ['', '', '']
 
     def format_output(self, rendered_widgets):

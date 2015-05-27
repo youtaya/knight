@@ -22,7 +22,7 @@ class PlaceMultiField(forms.MultiValueField):
 
     def compress(self, data_list):
         if data_list:
-            return ':'.join(data_list)
+            return ' '.join(data_list)
         return ''
 
     def to_python(self, value):
