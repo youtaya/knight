@@ -10,12 +10,10 @@ from urllib import urlopen, urlencode
 import urllib2
 
 from fuzzybee.conf import b_url, b_ak, geo_table, l_url, app_id, app_key
-from utils.pack_json import toJSON
+from utils.pack_json import toJSON, fromJSON
 
 import logging
 logger = logging.getLogger(__name__)
-
-
 
 def index(request):
     form = None
@@ -29,9 +27,8 @@ def index(request):
             #save factory in model
             factmodel = form.save()
             factid = factmodel.id
-            #save in public server: B/L
-            create_poi_bmap(factory)
-            save_factory_lcloud(factory)
+            #save in public server: leancloud and baidu
+            save_factory_cloud(factory)
             return HttpResponseRedirect(reverse('board:detail', args=(factid,)) )
     else:
         form = FactoryForm()
@@ -42,29 +39,7 @@ def detail(request, fact_id):
     info = get_object_or_404(Factory, pk=fact_id)
     return render(request, 'board/detail.html', {'info':info})
 
-def create_poi_bmap(fact_info):
-    title = fact_info['fact_name']
-    address = fact_info['fact_addr']
-    lat = fact_info['fact_lat']
-    lng = fact_info['fact_lng']
-    num = fact_info['hire_num']
-
-    params = urlencode({
-        'title': title.encode("utf-8"),
-        'address': address.encode("utf-8"),
-        'latitude': lat,
-        'longitude': lng,
-        'coord_type': 3,
-        'geotable_id': geo_table,
-        'ak': b_ak,
-        'job_num': num,
-        })
-    req = urllib2.Request(b_url, params)
-    #print str(req)
-    respone = urllib2.urlopen(req)
-    #print respone.read()
-
-def save_factory_lcloud(fact_info):
+def save_factory_cloud(fact_info):
     title = fact_info['fact_name']
     address = fact_info['fact_addr']
     lat = fact_info['fact_lat']
@@ -85,5 +60,25 @@ def save_factory_lcloud(fact_info):
     }
     req = urllib2.Request(l_url, toJSON(data), head)
     print str(req)
-    respone = urllib2.urlopen(req)
-    print respone.read()
+    response = urllib2.urlopen(req)
+    #print respone.read()
+    lean_response = fromJSON(response.read())
+    print lean_response
+
+    lean_objectId = lean_response['objectId']
+    # save in Baidu Map
+    params = urlencode({
+        'title': title.encode("utf-8"),
+        'address': address.encode("utf-8"),
+        'latitude': lat,
+        'longitude': lng,
+        'coord_type': 3,
+        'geotable_id': geo_table,
+        'ak': b_ak,
+        'job_num': num,
+        'lean_id': lean_objectId,
+        })
+    req = urllib2.Request(b_url, params)
+    #print str(req)
+    response = urllib2.urlopen(req)
+    #print respone.read()
