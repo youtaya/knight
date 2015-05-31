@@ -28,7 +28,7 @@ def index(request):
             factmodel = form.save()
             factid = factmodel.id
             #save in public server: leancloud and baidu
-            save_factory_cloud(factory)
+            save_factory_cloud(factory, factid)
             return HttpResponseRedirect(reverse('board:detail', args=(factid,)) )
     else:
         form = FactoryForm()
@@ -39,7 +39,7 @@ def detail(request, fact_id):
     info = get_object_or_404(Factory, pk=fact_id)
     return render(request, 'board/detail.html', {'info':info})
 
-def save_factory_cloud(fact_info):
+def save_factory_cloud(fact_info, fact_id):
     title = fact_info['fact_name']
     address = fact_info['fact_addr']
     lat = fact_info['fact_lat']
@@ -52,6 +52,7 @@ def save_factory_cloud(fact_info):
         'latitude': lat,
         'longitude': lng,
         'job_num': num,
+        'factory_id': fact_id,
         }
     head = {
         'X-AVOSCloud-Application-Id': app_id,
