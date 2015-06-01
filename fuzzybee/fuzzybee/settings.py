@@ -85,6 +85,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Template files
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, "templates"),
+)
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

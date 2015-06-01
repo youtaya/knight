@@ -8,5 +8,6 @@ urlpatterns = patterns('',
 
     url(r'^$', 'joboard.views.index',name='home'),
     url(r'^board/', include('joboard.urls', namespace="board")),
+    url(r'^resume/', include('resume.urls', namespace="resume")),
     url(r'^admin/', include(admin.site.urls)),
 )

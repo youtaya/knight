@@ -19,7 +19,7 @@ def index(request):
     form = None
     if request.method == 'POST':
         form = FactoryForm(request.POST)
-        #print form
+        print form
         if form.is_valid():
             factory = form.cleaned_data
             logger.debug("lat: " + str(factory['fact_lat']))
