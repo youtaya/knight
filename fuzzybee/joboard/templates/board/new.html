@@ -1,8 +1,11 @@
 {% extends "base/base.html" %}
 
-{% load staticfiles %}
-<link rel="stylesheet" href="{% static 'joboard/static/css/style.css' %}" />
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XOyqpuhcxMxuHjpUr4T2BIOG"></script>
+{% block extrastyle %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XOyqpuhcxMxuHjpUr4T2BIOG"></script>
+  <script language="JavaScript" async type="text/javascript" src="{% static 'js/geopoint.js' %}"></script>
+{% endblock %}
 
 {% block content %}
   <div class="jumbotron">
@@ -37,4 +40,3 @@
     </form>
   </div>
 {% endblock %}
-<script language="JavaScript" async type="text/javascript" src="{% static 'joboard/static/js/geopoint.js' %}"></script>
