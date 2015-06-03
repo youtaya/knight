@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.forms.models import model_to_dict
 from resume.forms import ResumeForm
+from joboard.models import Factory
 
 import logging
 logger = logging.getLogger(__name__)

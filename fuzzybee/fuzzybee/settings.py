@@ -39,6 +39,7 @@ INSTALLED_APPS = (
 
     # custom app
     'joboard',
+    'resume',
 )
 
 MIDDLEWARE_CLASSES = (
