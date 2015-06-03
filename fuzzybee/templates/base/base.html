@@ -27,9 +27,7 @@
         <ul class="nav navbar-nav">
           <li class="active"><a href="{% url 'home' %}">招聘</a></li>
           <li><a href="#">关于</a></li>
-          {% with var=1 %}
-            <li><a href="{% url 'resume:applylist' var %}">联系我们</a></li>
-          {% endwith %}
+          <li><a href="{% url 'resume:applylist' %}">联系我们</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div><!--/.container-fluid -->

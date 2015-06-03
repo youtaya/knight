@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.forms.models import model_to_dict
+from resume.models import Resume
 from resume.forms import ResumeForm
 from joboard.models import Factory
 
@@ -26,7 +27,16 @@ def applysync(request):
 
         return HttpResponse(200)
 
-def applylist(request, fact_id):
+def applylist(request):
+    #TODO: hard code 1
+    fact_id = 1
+    factory = Factory.objects.get(id=fact_id)
+    resumes = Resume.objects.filter(apply_factory=factory)
+    relist = [ResumeForm(model_to_dict(resume)) for resume in resumes]
+
+    return render(request, 'resume/list.html', {'relist':relist})
+
+def applyid(request, fact_id):
     factory = Factory.objects.get(id=fact_id)
     resumes = Resume.objects.filter(apply_factory=factory)
     relist = [ResumeForm(model_to_dict(resume)) for resume in resumes]
