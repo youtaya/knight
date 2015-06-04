@@ -1,9 +1,20 @@
 {% extends "base/base.html" %}
 
 {% block content %}
-  {% for object in relist %}
-    {% for field in object %}
-      <li><b>{{ field.label }}:</b> {{ field.data }}</li>
-    {% endfor %}
-  {% endfor %}
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <tr>
+        {% for head in relist.0 %}
+          <th>{{ head.label }}</th>
+        {% endfor %}
+      </tr>
+      {% for object in relist %}
+        <tr>
+        {% for field in object %}
+          <td>{{ field.data }}</td>
+        {% endfor %}
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
 {% endblock %}
