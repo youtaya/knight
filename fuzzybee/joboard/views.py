@@ -29,7 +29,7 @@ def index(request):
             factid = factmodel.id
             #save in public server: leancloud and baidu
             save_factory_cloud(factory, factid)
-            return HttpResponseRedirect(reverse('board:detail', args=(factid,)) )
+            return HttpResponseRedirect(reverse('board:detail', args=(factid,)))
     else:
         form = FactoryForm()
     return render_to_response('board/new.html', {'form': form}, context_instance=RequestContext(request))
