@@ -115,5 +115,9 @@ LOGGING = {
             'handlers': ['file'],
             'level': 'DEBUG'
         },
+        'people': {
+            'handlers': ['file'],
+            'level': 'DEBUG'
+        },
     },
 }

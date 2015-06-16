@@ -26,7 +26,25 @@ def signup(request):
     return render_to_response('people/signup.html', {'form': form}, context_instance=RequestContext(request))
 
 def login(request):
-    pass
+    form = None
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        print form
+        if form.is_valid():
+            signup = form.cleaned_data
+            logger.debug("name: " + signup['username'])
+            logger.debug("password: " + signup['password'])
+
+            user_name = signup['username']
+            password = signup['password']
+            user = User.objects.filter(username = user_name,password = password)
+
+            if user:
+                HttpResponseRedirect(reverse('joboard:detail'))
+    else:
+        form = SignupForm()
+    return render_to_response('people/login.html', {'form': form}, context_instance=RequestContext(request))
+
 
 def add_avatar(request):
     pass
