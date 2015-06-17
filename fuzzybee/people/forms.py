@@ -13,11 +13,15 @@ class SignupForm(ModelForm):
             'password': _(u'密码'),
         }
 
-class LoginForm(ModelForm):
-    class Meta:
-        model = User
-        fields = ['username','password']
-        labels = {
-            'username': _(u'用户名/手机号码'),
-            'password': _(u'密码'),
-        }
+class LoginForm(forms.Form):
+
+    username = forms.CharField(
+        label=_("Username"),
+        max_length=30,
+        widget=forms.TextInput(),
+        required=True
+    )
+    password = forms.CharField(
+        label=_("Password"),
+        widget=forms.PasswordInput(render_value=False)
+    )

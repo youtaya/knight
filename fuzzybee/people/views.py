@@ -3,7 +3,8 @@ from django.shortcuts import get_object_or_404, render_to_response, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from people.models import People
-from people.forms import SignupForm
+from people.forms import SignupForm,LoginForm
+from django.contrib.auth.models import User
 from django.template import RequestContext
 import logging
 logger = logging.getLogger(__name__)
@@ -28,21 +29,23 @@ def signup(request):
 def login(request):
     form = None
     if request.method == 'POST':
-        form = SignupForm(request.POST)
+        form = LoginForm(request.POST)
         print form
         if form.is_valid():
-            signup = form.cleaned_data
-            logger.debug("name: " + signup['username'])
-            logger.debug("password: " + signup['password'])
+            login = form.cleaned_data
+            logger.debug("name: " + login['username'])
+            logger.debug("password: " + login['password'])
 
-            user_name = signup['username']
-            password = signup['password']
+            user_name = login['username']
+            password = login['password']
             user = User.objects.filter(username = user_name,password = password)
 
             if user:
-                HttpResponseRedirect(reverse('joboard:detail'))
+                print "user active"
+                return HttpResponseRedirect(reverse('home'))
+
     else:
-        form = SignupForm()
+        form = LoginForm()
     return render_to_response('people/login.html', {'form': form}, context_instance=RequestContext(request))
 
 
