@@ -1,0 +1,34 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+
+  <div class="jumbotron">
+    <h2>招聘信息</h2>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>企业名称</td>
+          <td>{{ info.fact_name }}</td>
+        </tr>
+        <tr>
+          <td>工作地址</td>
+          <td>{{ info.fact_addr }}</td>
+        </tr>
+        <tr>
+          <td>招聘人数</td>
+          <td>{{ info.hire_num }}</td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+  <a href="{% url 'home'  %}">返回</a>
+  
+{% endblock %}

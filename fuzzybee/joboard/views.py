@@ -11,10 +11,11 @@ import urllib2
 
 from fuzzybee.conf import b_url, b_ak, geo_table, l_url, app_id, app_key
 from utils.pack_json import toJSON, fromJSON
-
+from django.contrib.auth.decorators import login_required
 import logging
 logger = logging.getLogger(__name__)
 
+@login_required
 def index(request):
     form = None
     if request.method == 'POST':
@@ -34,10 +35,17 @@ def index(request):
         form = FactoryForm()
     return render_to_response('board/new.html', {'form': form}, context_instance=RequestContext(request))
 
+@login_required
 def detail(request, fact_id):
     print fact_id
     info = get_object_or_404(Factory, pk=fact_id)
     return render(request, 'board/detail.html', {'info':info})
+
+@login_required
+def manager(request):
+    print "manager..."
+    info = get_object_or_404(Factory, fact_maintainer=request.user)
+    return render(request, 'board/manager.html', {'info':info})
 
 def save_factory_cloud(fact_info, fact_id):
     title = fact_info['fact_name']

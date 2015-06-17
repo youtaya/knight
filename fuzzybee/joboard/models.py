@@ -5,6 +5,7 @@ from django.utils.encoding import smart_unicode
 import os
 from django.conf import settings
 from utils.constant import GENDER
+from people.models import People
 
 class PlaceMultiModelField(models.Field):
 
@@ -24,6 +25,7 @@ f = open(os.path.join(settings.BASE_DIR, 'salary'))
 JOB_SALARY = ((smart_unicode(salary.strip()),smart_unicode(salary.strip())) for salary in f.readlines())
 
 class Factory(models.Model):
+    fact_maintainer = models.ForeignKey(People, related_name='hr')
     fact_name = models.CharField(max_length=200)
     job_position = models.CharField(max_length=40, choices=JOB_CHOICES)
     job_salary = models.CharField(max_length=10, choices=JOB_SALARY)

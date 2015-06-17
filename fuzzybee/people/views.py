@@ -5,11 +5,12 @@ from django.core.urlresolvers import reverse
 from people.models import People
 from people.forms import SignupForm,LoginForm
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 from django.template import RequestContext
 import logging
 logger = logging.getLogger(__name__)
 
-def signup(request):
+def signup_view(request):
     form = None
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -26,23 +27,32 @@ def signup(request):
         form = SignupForm()
     return render_to_response('people/signup.html', {'form': form}, context_instance=RequestContext(request))
 
-def login(request):
+def login_view(request):
     form = None
     if request.method == 'POST':
         form = LoginForm(request.POST)
-        print form
+        #print form
         if form.is_valid():
-            login = form.cleaned_data
-            logger.debug("name: " + login['username'])
-            logger.debug("password: " + login['password'])
 
-            user_name = login['username']
-            password = login['password']
-            user = User.objects.filter(username = user_name,password = password)
+            username = request.POST.get('username', '')
+            password = request.POST.get('password', '')
 
-            if user:
-                print "user active"
-                return HttpResponseRedirect(reverse('home'))
+            print "name: " + username
+            print "password: " + password
+
+            user = authenticate(username=username,password=password)
+
+            if user is not None:
+                if user.is_active:
+                    print "user active"
+                    login(request, user)
+                    return HttpResponseRedirect(reverse('board:manager'))
+                else:
+                    print "user not active"
+                    return HttpResponse(404)
+            else:
+                print "user not exist"
+                return HttpResponse(503)
 
     else:
         form = LoginForm()

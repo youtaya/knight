@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('joboard', '0005_auto_20150603_2259'),
+        ('joboard', '0001_initial'),
     ]
 
     operations = [
