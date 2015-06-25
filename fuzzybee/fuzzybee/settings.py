@@ -117,6 +117,10 @@ LOGGING = {
             'handlers': ['file'],
             'level': 'DEBUG'
         },
+        'resume': {
+            'handlers': ['file'],
+            'level': 'DEBUG'
+        },
         'people': {
             'handlers': ['file'],
             'level': 'DEBUG'

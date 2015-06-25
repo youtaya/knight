@@ -2,9 +2,11 @@
 from django.shortcuts import get_object_or_404, render_to_response, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
+from django.shortcuts import redirect
 from joboard.models import Factory
 from joboard.forms import FactoryForm
 from django.template import RequestContext
+from django.core.exceptions import ObjectDoesNotExist
 
 from urllib import urlopen, urlencode
 import urllib2
@@ -12,6 +14,7 @@ import urllib2
 from fuzzybee.conf import b_url, b_ak, geo_table, l_url, app_id, app_key
 from utils.pack_json import toJSON, fromJSON
 from django.contrib.auth.decorators import login_required
+from people.models import People
 import logging
 logger = logging.getLogger(__name__)
 
@@ -26,7 +29,11 @@ def index(request):
             logger.debug("lat: " + str(factory['fact_lat']))
             logger.debug("addr: " + factory['fact_addr'])
             #save factory in model
-            factmodel = form.save()
+            factmodel = form.save(commit=False)
+            print request.user
+            factmodel.fact_maintainer = People.objects.get(user=request.user)
+            factmodel.save()
+
             factid = factmodel.id
             #save in public server: leancloud and baidu
             save_factory_cloud(factory, factid)
@@ -44,7 +51,11 @@ def detail(request, fact_id):
 @login_required
 def manager(request):
     print "manager..."
-    info = get_object_or_404(Factory, fact_maintainer=request.user)
+    try:
+        factory = Factory.objects.get(fact_maintainer=request.user)
+    except ObjectDoesNotExist:
+        print 'no hire action...'
+        return redirect(reverse('joboard.views.index', args=[]))
     return render(request, 'board/manager.html', {'info':info})
 
 def save_factory_cloud(fact_info, fact_id):

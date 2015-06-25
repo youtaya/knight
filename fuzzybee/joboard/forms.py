@@ -8,6 +8,7 @@ from widgets import PlaceMultiWidget
 class FactoryForm(ModelForm):
     class Meta:
         model = Factory
+        exclude = ('fact_maintainer',)
         fields = ['fact_name','job_position','job_salary','job_gender','fact_addr','fact_lat','fact_lng','hire_num']
         labels = {
             'fact_name': _(u'企业名称'),

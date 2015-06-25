@@ -20,7 +20,12 @@ def signup_view(request):
             logger.debug("name: " + signup['username'])
             logger.debug("password: " + signup['password'])
             #save in user model
-            user_model = form.save()
+            user_model = form.save(commit=False)
+            user_model.set_password(signup['password'])
+            user_model.save()
+            #save in people model
+            people_model = People(user=user_model)
+            people_model.save()
 
             return HttpResponseRedirect(reverse('people:login'))
     else:
