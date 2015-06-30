@@ -52,11 +52,12 @@ def detail(request, fact_id):
 def manager(request):
     print "manager..."
     try:
-        factory = Factory.objects.get(fact_maintainer=request.user)
+        people = People.objects.get(user=request.user)
+        factory = Factory.objects.get(fact_maintainer=people)
     except ObjectDoesNotExist:
         print 'no hire action...'
         return redirect(reverse('joboard.views.index', args=[]))
-    return render(request, 'board/manager.html', {'info':info})
+    return render(request, 'board/manager.html', {'info':factory})
 
 def save_factory_cloud(fact_info, fact_id):
     title = fact_info['fact_name']
