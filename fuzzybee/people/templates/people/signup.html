@@ -1,4 +1,9 @@
 {% extends "base/base.html" %}
+{% block extrastyle %}
+  {% load static %}
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="{% static 'css/signin.css' %}" />
+{% endblock %}
 
 {% block content %}
   <div class="container">

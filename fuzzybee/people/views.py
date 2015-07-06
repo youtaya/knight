@@ -63,7 +63,9 @@ def login_view(request):
         form = LoginForm()
     return render_to_response('people/login.html', {'form': form}, context_instance=RequestContext(request))
 
-
+def logout_view(request):
+    pass
+    
 def add_avatar(request):
     pass
 
